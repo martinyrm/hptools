@@ -1,6 +1,5 @@
 # HPTools v3.0.8
-Released under the GNU General Public Licence
-
+Released under the GNU General Public Licence\
 Modified (22/06/2020) to compile on modern GCC versions (tested on GCC v9.3.0)
 
 
