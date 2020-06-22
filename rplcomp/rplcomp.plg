@@ -1,0 +1,60 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: rplcomp - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\TEMP\RSP44F.tmp" with contents
+[
+/nologo /ML /W3 /GX /O2 /I "../include.win" /I "../include" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "HAVE_STRING_H" /D "HAVE_CONFIG_H" /Fp"../Release/rplcomp.pch" /YX /Fo"../Release/" /Fd"../Release/" /FD /c 
+"\\hpaco\de\Tools\Src\Hptools\common\debug.c"
+"\\hpaco\de\Tools\Src\Hptools\common\envfile.c"
+"\\hpaco\de\Tools\Src\Hptools\common\getopt.c"
+"\\hpaco\de\Tools\Src\Hptools\rplcomp\hash.c"
+"\\hpaco\de\Tools\Src\Hptools\rplcomp\masd.c"
+"\\hpaco\de\Tools\Src\Hptools\rplcomp\rplcomp.c"
+"\\hpaco\de\Tools\Src\Hptools\common\version.c"
+"\\HPACO\DE\Tools\Src\Hptools\rplcomp\defer.c"
+]
+Creating command line "cl.exe @C:\TEMP\RSP44F.tmp" 
+Creating temporary file "C:\TEMP\RSP450.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:no /pdb:"../Release/rplcomp.pdb" /machine:I386 /out:"../Release/rplcomp.exe" 
+\Tools\Src\Hptools\Release\debug.obj
+\Tools\Src\Hptools\Release\envfile.obj
+\Tools\Src\Hptools\Release\getopt.obj
+\Tools\Src\Hptools\Release\hash.obj
+\Tools\Src\Hptools\Release\masd.obj
+\Tools\Src\Hptools\Release\rplcomp.obj
+\Tools\Src\Hptools\Release\version.obj
+\Tools\Src\Hptools\Release\defer.obj
+]
+Creating command line "link.exe @C:\TEMP\RSP450.tmp"
+<h3>Output Window</h3>
+Compiling...
+debug.c
+envfile.c
+getopt.c
+hash.c
+masd.c
+rplcomp.c
+\\hpaco\de\Tools\Src\Hptools\rplcomp\rplcomp.c(378) : warning C4028: formal parameter 1 different from declaration
+\\hpaco\de\Tools\Src\Hptools\rplcomp\rplcomp.c(1641) : warning C4018: '!=' : signed/unsigned mismatch
+version.c
+\\hpaco\de\Tools\Src\Hptools\rplcomp\rplcomp.c(958) : warning C4761: integral size mismatch in argument; conversion supplied
+\\hpaco\de\Tools\Src\Hptools\rplcomp\rplcomp.c(998) : warning C4761: integral size mismatch in argument; conversion supplied
+\\hpaco\de\Tools\Src\Hptools\rplcomp\rplcomp.c(1002) : warning C4761: integral size mismatch in argument; conversion supplied
+\\hpaco\de\Tools\Src\Hptools\rplcomp\rplcomp.c(1611) : warning C4761: integral size mismatch in argument; conversion supplied
+\\hpaco\de\Tools\Src\Hptools\rplcomp\rplcomp.c(1681) : warning C4761: integral size mismatch in argument; conversion supplied
+defer.c
+Linking...
+
+
+
+<h3>Results</h3>
+rplcomp.exe - 0 error(s), 7 warning(s)
+</pre>
+</body>
+</html>

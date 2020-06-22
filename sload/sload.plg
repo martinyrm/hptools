@@ -1,0 +1,35 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: sload - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\TEMP\RSP456.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:no /pdb:"../Release/sload.pdb" /machine:I386 /out:"../Release/sload.exe" 
+\Tools\Src\Hptools\Release\code.obj
+\Tools\Src\Hptools\Release\convert.obj
+\Tools\Src\Hptools\Release\debug.obj
+\Tools\Src\Hptools\Release\envfile.obj
+\Tools\Src\Hptools\Release\error.obj
+\Tools\Src\Hptools\Release\getopt.obj
+\Tools\Src\Hptools\Release\input.obj
+\Tools\Src\Hptools\Release\output.obj
+\Tools\Src\Hptools\Release\sload.obj
+\Tools\Src\Hptools\Release\sptree.obj
+\Tools\Src\Hptools\Release\symb.obj
+\Tools\Src\Hptools\Release\version.obj
+]
+Creating command line "link.exe @C:\TEMP\RSP456.tmp"
+<h3>Output Window</h3>
+Linking...
+
+
+
+<h3>Results</h3>
+sload.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

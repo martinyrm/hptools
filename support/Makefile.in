@@ -1,0 +1,140 @@
+#
+#   HP Tools Package @VERSION@
+#
+#   (c) 1998-2002 Hewlett-Packard and Jean-Yves Avenard
+#
+# Prior any use, please read the licence agreement in the doc/COPYING file 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+
+# Directory where binaries reside
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @prefix@/bin
+mandir = @mandir@/man1
+
+CC = @CC@
+CFLAGS = @CFLAGS@
+CPPFLAGS = @DEFS@
+INCLUDEDIR = -I. -I../include
+INSTALL = @INSTALL@
+RM = rm -f
+
+# If you don't have getopt() then define this
+GETOPT = #getopt.o
+
+#
+# Don't change anything below here...
+#
+
+TARGETS = makerom rplcomp sasm sload
+
+RPLCOMPOBJS = debug.o hash.o rplcomp.o version.o masd.o defer.o envfile.o error.o
+
+SASMOBJS = convert.o debug.o error.o expr.o opcodegen.o \
+	opcode.o symbols.o sasm.o version.o getopt.o envfile.o
+
+SLOADOBJS = convert.o debug.o error.o code.o getopt.o input.o \
+	output.o sload.o sptree.o symb.o version.o envfile.o
+
+all: $(TARGETS)
+
+.c.o:
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../$(SRCDIR)/$<
+
+
+makerom: version.o makerom.o
+	$(CC) $(CFLAGS) -o makerom makerom.o version.o
+
+rplcomp: $(RPLCOMPOBJS)
+	$(CC) $(CFLAGS) -o rplcomp $(RPLCOMPOBJS) $(GETOPT)
+
+sasm: $(SASMOBJS)
+	$(CC) $(CFLAGS) -o sasm $(SASMOBJS) $(GETOPT)
+
+sload: $(SLOADOBJS)
+	$(CC) $(CFLAGS) -o sload $(SLOADOBJS) $(GETOPT)
+
+envfile.o: ../common/envfile.c ../include/envfile.h config.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../common/envfile.c -o envfile.o
+
+getopt.o: ../common/getopt.c ../include/getopt.h config.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../common/getopt.c
+
+debug.o: ../common/debug.c config.h ../include/debug.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../common/debug.c
+
+error.o: ../common/error.c config.h 
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../common/error.c
+
+version.o: ../common/version.c config.h ../include/version.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../common/version.c
+
+convert.o: ../common/convert.c config.h ../include/convert.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../common/convert.c
+
+#SASM object
+sasm.o: ../include/sasm.h config.h ../sasm/sasm.c ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sasm/sasm.c
+
+expr.o: ../include/expr.h ../sasm/expr.c config.h ../include/sasm.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sasm/expr.c
+
+opcode.o: ../include/opcode.h ../sasm/opcode.c config.h ../include/sasm.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sasm/opcode.c
+
+opcodegen.o: ../sasm/opcodegen.c config.h ../include/sasm.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sasm/opcodegen.c
+
+symbols.o: ../include/symbols.h ../sasm/symbols.c config.h ../include/sasm.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sasm/symbols.c
+
+#SLOAD object
+sload.o: ../include/sload.h ../sload/sload.c config.h ../include/sload.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sload/sload.c
+
+input.o: ../include/input.h ../sload/input.c config.h ../include/sload.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sload/input.c
+
+output.o: ../include/output.h ../sload/output.c config.h ../include/sload.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sload/output.c
+
+code.o: ../include/code.h ../sload/code.c config.h ../include/sload.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sload/code.c
+
+sptree.o: ../include/sptree.h ../sload/sptree.c config.h ../include/sload.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sload/sptree.c
+
+symb.o: ../include/symb.h ../sload/symb.c config.h ../include/sload.h ../include/saturn.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../sload/symb.c
+
+#RPLCOMP
+rplcomp.o: ../include/rplcomp.h ../rplcomp/rplcomp.c config.h ../include/rplcomp.h 
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../rplcomp/rplcomp.c
+
+hash.o: ../include/hash.h ../rplcomp/hash.c config.h ../include/rplcomp.h 
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../rplcomp/hash.c
+
+masd.o: ../include/masd.h ../rplcomp/masd.c config.h ../include/rplcomp.h 
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../rplcomp/masd.c
+
+defer.o: ../include/defer.h ../rplcomp/defer.c config.h ../include/rplcomp.h 
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../rplcomp/defer.c
+
+#MAKEROM
+makerom.o: ../include/makerom.h ../makerom/makerom.c config.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDEDIR) -c ../makerom/makerom.c
+
+
+install: all
+	@for i in $(TARGETS); do \
+		echo "Installing $$i";\
+		$(INSTALL) $$i $(bindir); \
+	done
+
+clean:
+	$(RM) makerom rplcomp sasm sload *.o *.bak core 
+
+# Dependencies

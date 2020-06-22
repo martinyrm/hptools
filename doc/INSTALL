@@ -1,0 +1,8 @@
+@(#)$Id: INSTALL,v 1.3 2002/12/07 03:14:25 avenardj Exp $
+
+	HP Tools 3.0.8
+
+to compile tools just type 'make', then follow the instructions.
+For more information, check the DOCS file
+
+Jean-Yves Avenard

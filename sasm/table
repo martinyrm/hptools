@@ -1,0 +1,18 @@
+#!/usr/local/bin/perl
+
+die "usage:	$0 <file>\n" if ($#ARGV != 0);
+
+$file = shift;		# get input file name
+
+open(infile, $file) || die "Cannot read $file\n";
+
+$id = 0;
+while ( $ligne = <infile>) {		# read the template file
+    $tab[$id++] = $ligne;
+}
+close(infile);
+
+foreach $ti (sort @tab)	{	# do name forms
+  print $ti;
+}
+

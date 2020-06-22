@@ -1,0 +1,325 @@
+
+	 HP tools version 3
+
+  o  How to install HP tools !?
+	* Unix-like platform and Cygwin
+	- unpack hptools*.tar.gz
+	- type 'make' and here you go ..
+	
+	*Win32 platform
+	You can compile the HPTools using Microsoft Visual C++ v5.0 and above
+	- Open the workspace gtools.dsw
+	- Compile each project individually
+	- The exe file will be generated in the folder Release
+	- hptoolsdll.dll will be generated in the folder Release\Dll
+
+O	Long file name support
+   From version 3.0.8, the HPTOOLS supports long file name.
+   
+   INCLUDE files in RPL source files can be enclosed with "" when there are spaces.
+   Example: INCLUDE "Long name.s".
+   MAKEROM, SLOAD: Directives can use long file name, simply enclosed them with "".
+   If the ending " is missing, then everything until the end of the line will be
+   considered as a file name
+   Example 1: REL "Long File Name.o"    This is considered as a comment
+   Example 2: REL "Long File Name.o
+
+
+O	MAKEROM
+  o New Options:
+    -a	: Don't fill with zeros when compiling an absolute address located programs
+    -c	: Compile with SASM generated file (head.a, link.a etc...)
+    -s	: Backward compatibility with the original MAKEROM written by HP in perl
+
+O	RPLCOMP
+  o New Options:
+    -X	: In case of compilation error, do not exit with an error code
+
+  o New tokens:
+    ASSEMBLEM .. MASD assembly language code .. !RPL
+    CODEM .. MASD assembly language code .. ENDCODE
+    
+  o Lambda variables (from version 3.0.8)
+     You must set an environment variable for the HP49.
+     DOS:
+       HP49: SET ADRLAM=34616
+       HP48: you may leave the ADRLAM variable undefined ir SET ADRLAM=  (either 0 or nothing after the =).
+       All HP platform: SET ADRLAM=GETLAM
+     Unix:
+       Will depend on your shell
+       bash: export ADRLAM=value (see above for value)
+       tcsh: setenv ADRLAM value (see above for value)
+
+O	SLOAD
+  o New Options:
+      -X	: If unferenced entry points, exit with an error
+
+O	SASM
+  o New Options:
+      -B	: Disallow binary digit in expression
+      -W	: Warning mode off
+      -z	: Disallow MASD instruction set
+
+  o  New opcodes description -
+
+	LASTR   \ASCII\         Load ASCII constant into A. The order of
+				characters is the reverse of LAASC.
+
+	LCSTR   \ASCII\         Load ASCII constant into C. The order of
+				characters is the reverse of LCASC.
+
+	CSTRING \ASCII..\       Generate ASCII characters, append zero byte
+				to the end. Each character is stored with the
+				least significant nibble at the lowest
+				address. The first character is placed at the
+				lowest address. This corresponds to the way
+				strings are in C programming language.
+				[40 characters maximum]
+
+	ASC(m)  \ASCII\         Generate ASCII characters. Each character is
+				stored with the least significant nibble at
+				the lowest address. The character count is
+				stored at the lowest address in a m-nibble
+				field, after which comes the first character.
+				[max 40 characters or the max allowed by m]
+				[1 _ m _ 5]
+
+	ASCM(m) \ASCII\         Generate ASCII characters. Each character is
+				stored with the least significant nibble at
+				the lowest address. The character count
+				decremented by one is stored at the lowest
+				address in a m-nibble field, after which
+				comes the first character.
+				[max 40 characters or max allowed by m]
+				[1 _ m _ 5]
+
+	HEX(m)  hhhhhhh         Generate hexadecimal nibbles. The number of
+				nibbles is stored at the lowest address,
+				followed by the first nibble. [80 nibbles max]
+
+	HEXM(m) hhhhhhh         Generate hexadecimal nibbles. The number of
+				nibbles decremented by one is stored at the
+				lowest address, followed by the first nibble.
+				[80 nibbles max]
+
+	NIBBIN  bbbbbbb         Generate binary data. The first bits are
+				stored at the lowest address, the end is
+				padded with zeros so that the last nibble
+				will be fully used. [80 bits max]
+
+	NIBGRB  bbbbbbb         Generate binary data for a grob representation.
+				The first bits are stored at the lowest
+				address, the end is padded with zeros so that
+				the last nibble will be fully used. The order
+				of bits in each nibble is the reverse of that
+				in the binary number. [80 bits max]
+
+	ABASE   expr            Set data allocation counter to expr.
+
+symbol  ALLOC   expr            Assign the value of the allocation counter to
+				symbol, then increase the counter by the
+				value of expr. If symbol is already defined
+				ALLOC generates an error.
+
+symbol  FOR     start end step  Generate assembly lines in loop,
+symbol  NEXT                    very similar to MACRO keyword.
+				$$ - '$' sign
+				$< - name
+				$0 - line number
+				$1 - loop value
+				$E - end value
+				$S - step value
+
+	- New MASD compatible mnemonics:
+
+	reg+	expression	field
+	reg=reg+	expression	field
+	reg-	expression	field
+	reg=reg-	expression	field
+	Dn+	expression
+	Dn-	expression
+
+	Expression can be > to 16 and < 0. If expression is zero, then the mnemonic is skipped.
+	Example:
+	D0+	46
+	is compiled into:
+	D0=D0+	16
+	D0=D0+	16
+	D0=D0+	14
+	
+	A=A+	0-10	A
+	is compiled into:
+	A=A-CON	A,10
+
+	A+	n	field	is identical to:
+	A=A+	n	field
+
+
+	 - new factors in expressions:
+
+		%bbbbbbb        Binary number.
+
+   Label Generation:
+
+   Special symbols are allocated for position dependant label generation
+   as follows:
+
+	--      refers to the previoys  -- label
+	-       refers to the previous  -  label
+	+       refers to the next      +  label
+	++      refers to the next      ++ label
+
+   The label generators are useful for example in iterated structures or
+   when you don't want to assing a specific name. Overuse is not
+   recommended though, it can easily make the source code hard to read.
+   Recommended usage:
+
+      - Skipping a small number of instructions
+
+		ST=0    5       Assume A<>C
+		?A#C    A
+		GOYES   +
+		ST=1    5       Flag A = C
+	+       GOTO    Blah
+
+      - Simple loops with only the loop branch.
+
+	-       A=A+C   A       Add C[A] to A[A] B[A] times
+		B=B-1   A
+		GONC    -
+
+      - Iterated data structures
+
+		REL(5)  ++      Link to next data slot
+		<data slot 1>
+	++      REL(5)  ++      Link to next data slot
+		<data slot 2>
+	++      ..
+
+
+	- Masd Label generations:
+	All the SKIP, SKELSE structure from MASD are available.
+	Check the MetaKernel manual for more details
+	Example:
+	{
+		?A=C	A
+		{
+		A+C	A
+		?A=0	A
+		UP
+		UP2
+		EXIT
+		D0+	34
+		}SKELSE{
+		A=C	A
+		UP
+		EXIT2
+		}
+	}
+	
+	is equivalent to:
+	Label1
+		?A=C	A
+		GOYES	label2
+	Label3	A=A+C	A
+		?A=0	A
+		GOYES	Label3
+		GOTO	Label1
+		GOTO	Label5
+		D0=D0+	16
+		D0=D0+	16
+		D0=D0+	2
+		GOTO	Label5
+	Label4
+		A=C	A
+		GOTO	Label4
+		GOTO	Label2
+	Label5
+	Label2
+
+o New mnemonics available
+	A+	expression	field
+	A-	expression	field
+	A=A+	expression	field
+	A=A-	expression	field
+	A=A+D0
+	A=A-D0
+	A+D0
+	A-D0
+	A=A+D1
+	A=A-D1
+	A+D1
+	A-D1
+	A+CON	field,expression	(expression must be between 2 and 16)
+	A-CON	field,expression	(expression must be between 2 and 16)
+	B+	expression	field
+	B-	expression	field
+	B=B+	expression	field
+	B=B-	expression	field
+	B=B+D0
+	B=B-D0
+	B+D0
+	B-D0
+	B=B+D1
+	B=B-D1
+	B+D1
+	B-D1
+	B+CON	field,expression	(expression must be between 2 and 16)
+	B-CON	field,expression	(expression must be between 2 and 16)
+	C+	expression	field
+	C-	expression	field
+	C=C+	expression	field
+	C=C-	expression	field
+	C=C+D0
+	C=C-D0
+	C+D0
+	C-D0
+	C=C+D1
+	C=C-D1
+	C+D1
+	C-D1
+	C+CON	field,expression	(expression must be between 2 and 16)
+	C-CON	field,expression	(expression must be between 2 and 16)
+	D+	expression	field
+	D-	expression	field
+	D=D+	expression	field
+	D=D-	expression	field
+	D=D+D0
+	D=D-D0
+	D+D0
+	D-D0
+	D=D+D1
+	D=D-D1
+	D+D1
+	D-D1
+	D+CON	field,expression	(expression must be between 2 and 16)
+	D-CON	field,expression	(expression must be between 2 and 16)
+	D0+	expression
+	D0-	expression
+	D1+	expression
+	D1-	expression
+	P+	expression	(expression must be between 1 and 16)
+	P-	expression	(expression must be between 1 and 16)
+	HS=0	expression	(expression must be between 0 and 16)
+	?HS=0	expression	(expression must be between 0 and 16)
+	HST=0	expression	(expression must be between 0 and 16)
+	?HST=0	expression	(expression must be between 0 and 16)
+
+	- Skip structure pseudo-instructions:
+	SKIP{
+	{	( open a skip bloc )
+	}	( close a skip bloc )
+	SKIPNC{
+	SKIPC{
+	SKC{
+	SKNC{
+	SKIPYES{
+	}SKELSE{
+	}SKLSE{
+	}SKEC{
+	}SKENC{
+	UP
+	UPn	( 0<n<9 )
+	EXIT
+	EXITn	( 0<n<9 )
+	

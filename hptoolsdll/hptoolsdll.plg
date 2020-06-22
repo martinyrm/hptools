@@ -1,0 +1,101 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: hptoolsdll - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\avenardj\LOCALS~1\Temp\RSP404.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /I "../include.win" /I "../include" /D "NDEBUG" /D "dll" /D "HAVE_CONFIG_H" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "HPTOOLSDLL_EXPORTS" /D "HAVE_STRING_H" /Fp"..\Release\Dll/hptoolsdll.pch" /YX /Fo"..\Release\Dll/" /Fd"..\Release\Dll/" /FD /c 
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sload\code.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\common\convert.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\common\debug.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\rplcomp\defer.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\common\dllfile.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\common\envfile.c"
+"\\SERVER1\AVENARDJ\cvs\Hp\Tools\Src\Hptools\common\error.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sasm\expr.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\common\getopt.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\rplcomp\hash.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sload\input.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\makerom\makerom.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\rplcomp\masd.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sasm\opcode.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sasm\opcodegen.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sload\output.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\rplcomp\rplcomp.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sasm\sasm.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sload\sload.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sload\sptree.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sload\symb.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sasm\symbols.c"
+"\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\common\version.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\avenardj\LOCALS~1\Temp\RSP404.tmp" 
+Creating temporary file "C:\DOCUME~1\avenardj\LOCALS~1\Temp\RSP405.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:no /pdb:"..\Release\Dll/hptoolsdll.pdb" /machine:I386 /out:"..\Release\Dll/hptoolsdll.dll" /implib:"..\Release\Dll/hptoolsdll.lib" 
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\code.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\convert.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\debug.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\defer.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\dllfile.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\envfile.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\error.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\expr.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\getopt.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\hash.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\input.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\makerom.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\masd.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\opcode.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\opcodegen.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\output.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\rplcomp.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\sasm.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\sload.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\sptree.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\symb.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\symbols.obj
+\cvs\Hp\Tools\Src\Hptools\Release\Dll\version.obj
+]
+Creating command line "link.exe @C:\DOCUME~1\avenardj\LOCALS~1\Temp\RSP405.tmp"
+<h3>Output Window</h3>
+Compiling...
+code.c
+\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sload\code.c(158) : warning C4018: '!=' : signed/unsigned mismatch
+\\server1\avenardj\cvs\Hp\Tools\Src\Hptools\sload\code.c(290) : warning C4018: '!=' : signed/unsigned mismatch
+convert.c
+debug.c
+defer.c
+dllfile.c
+envfile.c
+error.c
+expr.c
+getopt.c
+hash.c
+input.c
+makerom.c
+masd.c
+opcode.c
+opcodegen.c
+output.c
+rplcomp.c
+sasm.c
+sload.c
+sptree.c
+symb.c
+symbols.c
+version.c
+Linking...
+   Creating library ..\Release\Dll/hptoolsdll.lib and object ..\Release\Dll/hptoolsdll.exp
+
+
+
+<h3>Results</h3>
+hptoolsdll.dll - 0 error(s), 2 warning(s)
+</pre>
+</body>
+</html>

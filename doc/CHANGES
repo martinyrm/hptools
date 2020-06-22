@@ -1,0 +1,43 @@
+
+3.0
+	3.0.0
+	- first internal release
+
+	3.0.1
+	- Fixed some few compilation problems under Linux x86
+	- Fixed coredump problems under HP-UX (listit functions)
+
+	3.0.2
+	- Works independantly on every little or big endian system
+	- Added full MASD syntax support for RPLCOMP
+	- Some changes in the mnemonics table creation to speed up SASM
+	- Remove page format
+	- Support for labels up to 32 characters
+	- Fixed a sload bug while in command mode
+
+	3.0.3
+	- Fixed a problem in envfile.c/openfile, when defaultpath could be NULL
+	- Improved MASD compatibility
+	- Added option -X to rplcomp
+	- Added option -X to sload
+	- Added comparison token within expressions (<,<=,==,<>,>=,>)
+	- Added mnemonics #IF,#ELSE,#END to sasm and rplcomp
+	- Added ALG48/ERABLE/HP49 integers to rplcomp (ZINT)
+	3.0.4
+	- Added pseudo instruction INCLOB to rplcomp and sasm
+	- Added macro support in the MASD syntax
+	- Improved MASD compatibility
+	3.0.5
+	- Minor bug fixes
+	- Added VGER NullLam compatibility
+	3.0.6
+	- Fixed SASM bug with }SKELSE{
+	3.0.7
+	- Fixed RPLCOMP bug with C=PC in MASD mode
+	- Added GOINA and GOINC in MASD mode
+	3.0.8: Thanks to William Graves
+	- Fixed issues with LAMBDA variable and HP49G
+	- Added long file name support
+
+	
+

@@ -1,0 +1,10 @@
+#! /usr/bin/csh
+
+# rmcrlf '*.c'
+
+foreach z ( $1 )
+  echo $z
+  mv $z yoyo
+  dos2unix -ascii yoyo $z
+  \rm -fr yoyo
+end
